@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Adoptions</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <h1>Adoption Management</h1>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/pets">Manage Pets</a>
+        <a href="/adopters">Manage Adopters</a>
+    </nav>
+
+    <h2>Assign Adoption</h2>
+    <form action="/adoptions/assign" method="POST">
+        <label for="pet_id">Pet ID:</label>
+        <input type="number" id="pet_id" name="pet_id" required>
+        <label for="adopter_id">Adopter ID:</label>
+        <input type="number" id="adopter_id" name="adopter_id" required>
+        <button type="submit">Assign</button>
+    </form>
+
+    <h2>Adoption History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pet Name</th>
+                <th>Adopter Name</th>
+                <th>Adopted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .adoptions}}
+            <tr>
+                <td>{{.id}}</td>
+                <td>{{.pet_name}}</td>
+                <td>{{.adopter_name}}</td>
+                <td>{{.adopted_at}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</body>
+</html>
