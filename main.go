@@ -121,17 +121,17 @@ func deleteAdopter(c *gin.Context) {
 
 // Adoptions Handlers
 func listAdoptions(c *gin.Context) {
-	rows, _ := db.Query(`SELECT a.id, p.name AS pet_name, ad.name AS adopter_name, a.adopted_at 
-                         FROM adoptions a
-                         JOIN pets p ON a.pet_id = p.id
-                         JOIN adopters ad ON a.adopter_id = ad.id`)
-	defer rows.Close()
+	adoptionsRows, _ := db.Query(`SELECT a.id, p.name AS pet_name, ad.name AS adopter_name, a.adopted_at 
+                                  FROM adoptions a
+                                  JOIN pets p ON a.pet_id = p.id
+                                  JOIN adopters ad ON a.adopter_id = ad.id`)
+	defer adoptionsRows.Close()
 
 	var adoptions []map[string]interface{}
-	for rows.Next() {
+	for adoptionsRows.Next() {
 		var id int
 		var petName, adopterName, adoptedAt string
-		rows.Scan(&id, &petName, &adopterName, &adoptedAt)
+		adoptionsRows.Scan(&id, &petName, &adopterName, &adoptedAt)
 
 		adoptions = append(adoptions, map[string]interface{}{
 			"id":           id,
@@ -140,7 +140,43 @@ func listAdoptions(c *gin.Context) {
 			"adopted_at":   adoptedAt,
 		})
 	}
-	c.HTML(http.StatusOK, "adoptions.html", gin.H{"adoptions": adoptions})
+
+	petsRows, _ := db.Query("SELECT id, name, species FROM pets WHERE status != 'Adopted'")
+	defer petsRows.Close()
+
+	var pets []map[string]interface{}
+	for petsRows.Next() {
+		var id int
+		var name, species string
+		petsRows.Scan(&id, &name, &species)
+
+		pets = append(pets, map[string]interface{}{
+			"id":      id,
+			"name":    name,
+			"species": species,
+		})
+	}
+
+	adoptersRows, _ := db.Query("SELECT id, name FROM adopters")
+	defer adoptersRows.Close()
+
+	var adopters []map[string]interface{}
+	for adoptersRows.Next() {
+		var id int
+		var name string
+		adoptersRows.Scan(&id, &name)
+
+		adopters = append(adopters, map[string]interface{}{
+			"id":   id,
+			"name": name,
+		})
+	}
+
+	c.HTML(http.StatusOK, "adoptions.html", gin.H{
+		"adoptions": adoptions,
+		"pets":      pets,
+		"adopters":  adopters,
+	})
 }
 
 func assignAdoption(c *gin.Context) {
