@@ -37,12 +37,18 @@ func main() {
 	r.POST("/adopters/delete", deleteAdopter)
 	r.GET("/adoptions", listAdoptions)
 	r.POST("/adoptions/assign", assignAdoption)
+	r.GET("/FAQ", faqPage)
 
 	r.Run(":8080")
 }
 
 func homePage(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", nil)
+}
+
+func faqPage(c *gin.Context) {
+	c.HTML(http.StatusOK, "FAQ.html", nil)
+
 }
 
 // Pets Handlers

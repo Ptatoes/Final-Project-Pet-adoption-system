@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>FAQ</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Add TailwindCSS CDN if not already included -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pastel-green-100">
+
+    <!-- Header with pastel earthy green background -->
+    <header class="bg-pastel-green-400 text-white py-4">
+        <h1 class="text-3xl font-semibold text-center">Frequently Asked Questions</h1>
+    </header>
+
+    <nav class="mt-4">
+        <a href="/" class="text-pastel-green-500 hover:text-pastel-green-700">Home</a>
+        <a href="/pets" class="ml-4 text-pastel-green-500 hover:text-pastel-green-700">Manage Pets</a>
+        <a href="/adopters" class="ml-4 text-pastel-green-500 hover:text-pastel-green-700">Manage Adopters</a>
+        <a href="/adoptions" class="ml-4 text-pastel-green-500 hover:text-pastel-green-700">Manage Adoptions</a>
+        <a href="/FAQ" class="ml-4 text-pastel-green-500 hover:text-pastel-green-700">FAQ</a>
+    </nav>
+
+    <main class="px-8 py-6">
+        <h2 class="text-2xl font-semibold mb-6 text-pastel-green-700">FAQs</h2>
+        
+        <div class="space-y-6">
+            <!-- FAQ Item 1 -->
+            <details class="group border-s-4 border-pastel-beige-300 bg-pastel-yellow-50 p-6 dark:bg-gray-900 dark:text-white">
+                <summary class="flex cursor-pointer items-center justify-between gap-2 [&_summary::-webkit-details-marker]:hidden">
+                    <h3 class="text-lg font-medium text-pastel-green-700 dark:text-white">
+                        What is the purpose of this system?
+                    </h3>
+                    <span class="shrink-0 rounded-full bg-white p-1.5 text-pastel-green-700 sm:p-3 dark:bg-gray-800 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition duration-300 group-open:-rotate-45" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </summary>
+                <p class="mt-4 leading-relaxed text-pastel-green-700 dark:text-gray-200">
+                    This system allows users to manage pets, adopters, and adoption records efficiently.
+                </p>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details class="group border-s-4 border-pastel-beige-300 bg-pastel-yellow-50 p-6 dark:bg-gray-900 dark:text-white">
+                <summary class="flex cursor-pointer items-center justify-between gap-2 [&_summary::-webkit-details-marker]:hidden">
+                    <h3 class="text-lg font-medium text-pastel-green-700 dark:text-white">
+                        How can I add a new adopter?
+                    </h3>
+                    <span class="shrink-0 rounded-full bg-white p-1.5 text-pastel-green-700 sm:p-3 dark:bg-gray-800 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition duration-300 group-open:-rotate-45" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </summary>
+                <p class="mt-4 leading-relaxed text-pastel-green-700 dark:text-gray-200">
+                    Navigate to the "Manage Adopters" page, fill in the required details in the form, and click "Add Adopter."
+                </p>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details class="group border-s-4 border-pastel-beige-300 bg-pastel-yellow-50 p-6 dark:bg-gray-900 dark:text-white">
+                <summary class="flex cursor-pointer items-center justify-between gap-2 [&_summary::-webkit-details-marker]:hidden">
+                    <h3 class="text-lg font-medium text-pastel-green-700 dark:text-white">
+                        Can I delete an adopter?
+                    </h3>
+                    <span class="shrink-0 rounded-full bg-white p-1.5 text-pastel-green-700 sm:p-3 dark:bg-gray-800 dark:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition duration-300 group-open:-rotate-45" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </summary>
+                <p class="mt-4 leading-relaxed text-pastel-green-700 dark:text-gray-200">
+                    Yes! Use the "Delete" button next to the adopter's details on the "Adopters List" section.
+                </p>
+            </details>
+        </div>
+    </main>
+
+    <!-- Footer with pastel earth-toned background -->
+    <footer class="bg-pastel-beige-500 text-white py-4">
+        <p class="text-center">&copy; 2024 Pet Adoption Management System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

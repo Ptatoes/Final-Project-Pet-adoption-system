@@ -4,52 +4,63 @@
     <title>Manage Adopters</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body>
-    <header>
-       <h1>Adopter Management</h1>     
-    </header>
+<body class="bg-gray-50">
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/pets">Manage Pets</a>
-        <a href="/adopters">Manage Adopters</a>
-        <a href="/adoptions">Manage Adoptions</a>
-    </nav>
+<header class="bg-green-600 text-white py-4 text-center">
+    <h1 class="text-3xl">Adopter Management</h1>
+</header>
 
-    <h2>Add New Adopter</h2>
-    <form action="/adopters/add" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        <label for="contact">Contact:</label>
-        <input type="text" id="contact" name="contact" required>
-        <button type="submit">Add Adopter</button>
+<nav class="bg-green-100 p-4">
+    <a href="/" class="text-green-600 hover:text-green-800">Home</a>
+    <a href="/pets" class="ml-4 text-green-600 hover:text-green-800">Manage Pets</a>
+    <a href="/adopters" class="ml-4 text-green-600 hover:text-green-800">Manage Adopters</a>
+    <a href="/adoptions" class="ml-4 text-green-600 hover:text-green-800">Manage Adoptions</a>
+    <a href="/FAQ" class="ml-4 text-green-600 hover:text-green-800">FAQ</a>
+</nav>
+
+<main class="p-8">
+    <h2 class="text-2xl font-bold mb-4">Add New Adopter</h2>
+    <form action="/adopters/add" method="POST" class="space-y-4">
+        <label for="name" class="block">Name:</label>
+        <input type="text" id="name" name="name" required class="border p-2 rounded w-full">
+
+        <label for="contact" class="block">Contact:</label>
+        <input type="text" id="contact" name="contact" required class="border p-2 rounded w-full">
+
+        <button type="submit" class="w-full p-3 rounded bg-green-600 text-white">Add Adopter</button>
     </form>
 
-    <h2>Adopters List</h2>
-    <table>
+    <h2 class="text-2xl font-bold mt-8">Adopters List</h2>
+    <table class="min-w-full mt-4 border-collapse border">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Contact</th>
-                <th>Actions</th>
+                <th class="border p-2">ID</th>
+                <th class="border p-2">Name</th>
+                <th class="border p-2">Contact</th>
+                <th class="border p-2">Actions</th>
             </tr>
         </thead>
         <tbody>
             {{range .adopters}}
             <tr>
-                <td>{{.id}}</td>
-                <td>{{.name}}</td>
-                <td>{{.contact}}</td>
-                <td>
-                    <form action="/adopters/delete" method="POST" style="display: inline;">
+                <td class="border p-2">{{.id}}</td>
+                <td class="border p-2">{{.name}}</td>
+                <td class="border p-2">{{.contact}}</td>
+                <td class="border p-2">
+                    <form action="/adopters/delete" method="POST" class="inline">
                         <input type="hidden" name="id" value="{{.id}}">
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete this adopter?');">Delete</button>
+                        <button type="submit" class="text-red-600" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
             </tr>
             {{end}}
         </tbody>
     </table>
+</main>
+
+<footer class="bg-green-600 text-white py-4 text-center">
+    <p>&copy; 2024 Pet Adoption Management System. All rights reserved.</p>
+</footer>
+
 </body>
 </html>
