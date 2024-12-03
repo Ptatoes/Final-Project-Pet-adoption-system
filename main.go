@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -38,6 +39,7 @@ func main() {
 	r.GET("/adoptions", listAdoptions)
 	r.POST("/adoptions/assign", assignAdoption)
 	r.GET("/FAQ", faqPage)
+	r.GET("/pets/search", searchPets)
 
 	r.Run(":8080")
 }
@@ -51,7 +53,6 @@ func faqPage(c *gin.Context) {
 
 }
 
-// Pets Handlers
 func listPets(c *gin.Context) {
 	rows, _ := db.Query("SELECT id, name, species, status FROM pets")
 	defer rows.Close()
@@ -92,7 +93,39 @@ func deletePet(c *gin.Context) {
 	c.Redirect(http.StatusSeeOther, "/pets")
 }
 
-// Adopters Handlers
+func searchPets(c *gin.Context) {
+	query := c.Query("query")
+	log.Println("Search query:", query)
+
+	rows, err := db.Query("SELECT id, name, species, status FROM pets WHERE name LIKE ? OR species LIKE ?", "%"+query+"%", "%"+query+"%")
+	if err != nil {
+		log.Println("Error executing query:", err)
+		c.String(http.StatusInternalServerError, "Database query error")
+		return
+	}
+	defer rows.Close()
+
+	var pets []map[string]interface{}
+	for rows.Next() {
+		var id int
+		var name, species, status string
+		if err := rows.Scan(&id, &name, &species, &status); err != nil {
+			log.Println("Error scanning row:", err)
+			continue
+		}
+		log.Printf("Fetched pet: ID=%d, Name=%s, Species=%s, Status=%s\n", id, name, species, status)
+		pets = append(pets, map[string]interface{}{
+			"id":      id,
+			"name":    name,
+			"species": species,
+			"status":  status,
+		})
+	}
+	log.Println("Fetched pets:", pets)
+
+	c.HTML(http.StatusOK, "pets.html", gin.H{"pets": pets})
+}
+
 func listAdopters(c *gin.Context) {
 	rows, _ := db.Query("SELECT id, name, contact FROM adopters")
 	defer rows.Close()
@@ -125,7 +158,6 @@ func deleteAdopter(c *gin.Context) {
 	c.Redirect(http.StatusSeeOther, "/adopters")
 }
 
-// Adoptions Handlers
 func listAdoptions(c *gin.Context) {
 	adoptionsRows, _ := db.Query(`SELECT a.id, p.name AS pet_name, ad.name AS adopter_name, a.adopted_at 
                                   FROM adoptions a

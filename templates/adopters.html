@@ -4,52 +4,54 @@
     <title>Manage Adopters</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body class="bg-gray-50">
+<body>
 
-<header class="bg-green-600 text-white py-4 text-center">
-    <h1 class="text-3xl">Adopter Management</h1>
+<header>
+    <h1>Adopter Management</h1>
 </header>
 
-<nav class="bg-green-100 p-4">
-    <a href="/" class="text-green-600 hover:text-green-800">Home</a>
-    <a href="/pets" class="ml-4 text-green-600 hover:text-green-800">Manage Pets</a>
-    <a href="/adopters" class="ml-4 text-green-600 hover:text-green-800">Manage Adopters</a>
-    <a href="/adoptions" class="ml-4 text-green-600 hover:text-green-800">Manage Adoptions</a>
-    <a href="/FAQ" class="ml-4 text-green-600 hover:text-green-800">FAQ</a>
+<nav>
+    <a href="/">Home</a>
+    <a href="/pets">Manage Pets</a>
+    <a href="/adopters">Manage Adopters</a>
+    <a href="/adoptions">Manage Adoptions</a>
+    <a href="/FAQ">FAQ</a>
 </nav>
 
-<main class="p-8">
-    <h2 class="text-2xl font-bold mb-4">Add New Adopter</h2>
-    <form action="/adopters/add" method="POST" class="space-y-4">
-        <label for="name" class="block">Name:</label>
-        <input type="text" id="name" name="name" required class="border p-2 rounded w-full">
-
-        <label for="contact" class="block">Contact:</label>
-        <input type="text" id="contact" name="contact" required class="border p-2 rounded w-full">
-
-        <button type="submit" class="w-full p-3 rounded bg-green-600 text-white">Add Adopter</button>
+<main>
+    <h2>Add New Adopter</h2>
+    <form action="/adopters/add" method="POST" style="max-width: 600px; margin: 20px auto; background-color: #f4e3d0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div style="margin-bottom: 15px;">
+            <label for="name" style="font-weight: bold; display: block; margin-bottom: 5px;">Name:</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label for="contact" style="font-weight: bold; display: block; margin-bottom: 5px;">Contact:</label>
+            <input type="text" id="contact" name="contact" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        <button type="submit" style="background-color: #d9b38c; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">Add Adopter</button>
     </form>
 
-    <h2 class="text-2xl font-bold mt-8">Adopters List</h2>
-    <table class="min-w-full mt-4 border-collapse border">
+    <h2>Adopters List</h2>
+    <table>
         <thead>
             <tr>
-                <th class="border p-2">ID</th>
-                <th class="border p-2">Name</th>
-                <th class="border p-2">Contact</th>
-                <th class="border p-2">Actions</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {{range .adopters}}
             <tr>
-                <td class="border p-2">{{.id}}</td>
-                <td class="border p-2">{{.name}}</td>
-                <td class="border p-2">{{.contact}}</td>
-                <td class="border p-2">
-                    <form action="/adopters/delete" method="POST" class="inline">
+                <td>{{.id}}</td>
+                <td>{{.name}}</td>
+                <td>{{.contact}}</td>
+                <td>
+                    <form action="/adopters/delete" method="POST" style="display: inline;">
                         <input type="hidden" name="id" value="{{.id}}">
-                        <button type="submit" class="text-red-600" onclick="return confirm('Are you sure?')">Delete</button>
+                        <button type="submit" onclick="return confirm('Are you sure?')" style="background-color: #c94e50; color: white; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -58,7 +60,7 @@
     </table>
 </main>
 
-<footer class="bg-green-600 text-white py-4 text-center">
+<footer>
     <p>&copy; 2024 Pet Adoption Management System. All rights reserved.</p>
 </footer>
 

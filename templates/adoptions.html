@@ -4,72 +4,66 @@
     <title>Manage Adoptions</title>
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
-<body class="bg-gray-50">
+<body>
 
-<header class="bg-green-600 text-white py-4 text-center">
-    <h1 class="text-3xl">Adoption Management</h1>
+<header>
+    <h1>Adoption Management</h1>
 </header>
 
-<nav class="bg-green-100 p-4">
-    <a href="/" class="text-green-600 hover:text-green-800">Home</a>
-    <a href="/pets" class="ml-4 text-green-600 hover:text-green-800">Manage Pets</a>
-    <a href="/adopters" class="ml-4 text-green-600 hover:text-green-800">Manage Adopters</a>
-    <a href="/adoptions" class="ml-4 text-green-600 hover:text-green-800">Manage Adoptions</a>
-    <a href="/FAQ" class="ml-4 text-green-600 hover:text-green-800">FAQ</a>
+<nav>
+    <a href="/">Home</a>
+    <a href="/pets">Manage Pets</a>
+    <a href="/adopters">Manage Adopters</a>
+    <a href="/adoptions">Manage Adoptions</a>
+    <a href="/FAQ">FAQ</a>
 </nav>
 
-<main class="p-8">
-    <section class="form-section mb-8">
-        <h2 class="text-2xl font-bold">Assign Adoption</h2>
-        <form action="/adoptions/assign" method="POST" class="space-y-4">
-            <div>
-                <label for="pet_id" class="block">Pet:</label>
-                <select id="pet_id" name="pet_id" required class="border p-2 rounded w-full">
-                    {{range .pets}}
-                    <option value="{{.id}}">{{.name}} ({{.species}})</option>
-                    {{end}}
-                </select>
-            </div>
-
-            <div>
-                <label for="adopter_id" class="block">Adopter:</label>
-                <select id="adopter_id" name="adopter_id" required class="border p-2 rounded w-full">
-                    {{range .adopters}}
-                    <option value="{{.id}}">{{.name}}</option>
-                    {{end}}
-                </select>
-            </div>
-
-            <button type="submit" class="w-full p-3 rounded bg-green-600 text-white">Assign</button>
-        </form>
-    </section>
-
-    <section class="table-section mt-8">
-        <h2 class="text-2xl font-bold">Adoption History</h2>
-        <table class="min-w-full mt-4 border-collapse border">
-            <thead>
-                <tr>
-                    <th class="border p-2">ID</th>
-                    <th class="border p-2">Pet Name</th>
-                    <th class="border p-2">Adopter Name</th>
-                    <th class="border p-2">Adopted At</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{range .adoptions}}
-                <tr>
-                    <td class="border p-2">{{.id}}</td>
-                    <td class="border p-2">{{.pet_name}}</td>
-                    <td class="border p-2">{{.adopter_name}}</td>
-                    <td class="border p-2">{{.adopted_at}}</td>
-                </tr>
+<main>
+    <h2>Assign Adoption</h2>
+    <form action="/adoptions/assign" method="POST" style="max-width: 600px; margin: 20px auto; background-color: #f4e3d0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div style="margin-bottom: 15px;">
+            <label for="pet_id" style="font-weight: bold; display: block; margin-bottom: 5px;">Pet:</label>
+            <select id="pet_id" name="pet_id" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                {{range .pets}}
+                <option value="{{.id}}">{{.name}} ({{.species}})</option>
                 {{end}}
-            </tbody>
-        </table>
-    </section>
+            </select>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label for="adopter_id" style="font-weight: bold; display: block; margin-bottom: 5px;">Adopter:</label>
+            <select id="adopter_id" name="adopter_id" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                {{range .adopters}}
+                <option value="{{.id}}">{{.name}}</option>
+                {{end}}
+            </select>
+        </div>
+        <button type="submit" style="background-color: #d9b38c; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">Assign</button>
+    </form>
+
+    <h2>Adoption History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pet Name</th>
+                <th>Adopter Name</th>
+                <th>Adopted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .adoptions}}
+            <tr>
+                <td>{{.id}}</td>
+                <td>{{.pet_name}}</td>
+                <td>{{.adopter_name}}</td>
+                <td>{{.adopted_at}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
 </main>
 
-<footer class="bg-green-600 text-white py-4 text-center">
+<footer>
     <p>&copy; 2024 Pet Adoption Management System. All rights reserved.</p>
 </footer>
 
