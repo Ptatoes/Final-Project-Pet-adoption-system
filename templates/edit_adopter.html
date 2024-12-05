@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Adopter</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Edit Adopter</h1>
+</header>
+
+<nav>
+    <a href="/">Home</a>
+    <a href="/pets">Manage Pets</a>
+    <a href="/adopters">Manage Adopters</a>
+    <a href="/adoptions">Manage Adoptions</a>
+    <a href="/FAQ">FAQ</a>
+</nav>
+
+<main>
+    <h2>Update Adopter Details</h2>
+    <form action="/adopters/edit/{{.adopter.ID}}" method="POST" style="max-width: 600px; margin: 20px auto; background-color: #f4e3d0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+        <div style="margin-bottom: 15px;">
+            <label for="name" style="font-weight: bold; display: block; margin-bottom: 5px;">Name:</label>
+            <input type="text" id="name" name="name" value="{{.adopter.Name}}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label for="contact" style="font-weight: bold; display: block; margin-bottom: 5px;">Contact:</label>
+            <input type="text" id="contact" name="contact" value="{{.adopter.Contact}}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+        <button type="submit" style="background-color: #d9b38c; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">Update Adopter</button>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2024 Pet Adoption Management System. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

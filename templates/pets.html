@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Pets</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+ 
 </head>
 
 <body>
@@ -18,7 +19,24 @@
         <a href="/adoptions">Manage Adoptions</a>
         <a href="/FAQ">FAQ</a>
     </nav>
-    
+
+    {{if .successMessage}}
+    <div id="successMessage" class="success-message">
+        {{.successMessage}}
+    </div>
+    <script>
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.classList.add('fade-out');
+                // Remove the element entirely after fading out
+                setTimeout(() => successMessage.remove(), 500);
+            }
+        }, 1000);
+    </script>
+    {{end}}
+
     <h2>Add New Pet</h2>
     <form action="/pets/add" method="POST" style="max-width: 600px; margin: 20px auto; background-color: #f4e3d0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <div style="margin-bottom: 15px;">
@@ -31,7 +49,6 @@
         </div>
         <button type="submit" style="background-color: #d9b38c; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">Add Pet</button>
     </form>
-    
 
     <h2>Available Pets</h2>
     {{if .pets}}

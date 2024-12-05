@@ -80,11 +80,18 @@ func ListAdoptions(c *gin.Context, db *sql.DB) {
 		})
 	}
 
+	// Prepare a message if no pets are available
+	noPetsMessage := ""
+	if len(pets) == 0 {
+		noPetsMessage = "No pets are currently available for adoption."
+	}
+
 	// Render the adoptions page
 	c.HTML(http.StatusOK, "adoptions.html", gin.H{
-		"adoptions": adoptions,
-		"pets":      pets,
-		"adopters":  adopters,
+		"adoptions":     adoptions,
+		"pets":          pets,
+		"adopters":      adopters,
+		"noPetsMessage": noPetsMessage,
 	})
 }
 

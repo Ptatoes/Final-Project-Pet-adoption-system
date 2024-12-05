@@ -20,6 +20,9 @@
 
 <main>
     <h2>Assign Adoption</h2>
+    {{if .noPetsMessage}}
+    <p style="text-align: center; color: red;">{{.noPetsMessage}}</p>
+    {{else}}
     <form action="/adoptions/assign" method="POST" style="max-width: 600px; margin: 20px auto; background-color: #f4e3d0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <div style="margin-bottom: 15px;">
             <label for="pet_id" style="font-weight: bold; display: block; margin-bottom: 5px;">Pet:</label>
@@ -39,6 +42,7 @@
         </div>
         <button type="submit" style="background-color: #d9b38c; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">Assign</button>
     </form>
+    {{end}}
 
     <h2>Adoption History</h2>
     <table>

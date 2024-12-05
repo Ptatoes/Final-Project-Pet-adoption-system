@@ -32,14 +32,25 @@ func ListPets(c *gin.Context, db *sql.DB) {
 			"status":  status,
 		})
 	}
-	c.HTML(http.StatusOK, "pets.html", gin.H{"pets": pets})
+
+	// Get the success message, if any
+	successMessage := c.Query("successMessage")
+
+	c.HTML(http.StatusOK, "pets.html", gin.H{
+		"pets":           pets,
+		"successMessage": successMessage,
+	})
 }
 
 func AddPet(c *gin.Context, db *sql.DB) {
 	name := c.PostForm("name")
 	species := c.PostForm("species")
-	_, _ = db.Exec("INSERT INTO pets (name, species) VALUES (?, ?)", name, species)
-	c.Redirect(http.StatusSeeOther, "/pets")
+	_, err := db.Exec("INSERT INTO pets (name, species) VALUES (?, ?)", name, species)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to add pet")
+		return
+	}
+	c.Redirect(http.StatusSeeOther, "/pets?successMessage=Pet successfully added!")
 }
 
 func UpdatePet(c *gin.Context, db *sql.DB) {
@@ -51,8 +62,12 @@ func UpdatePet(c *gin.Context, db *sql.DB) {
 
 func DeletePet(c *gin.Context, db *sql.DB) {
 	id := c.PostForm("id")
-	_, _ = db.Exec("DELETE FROM pets WHERE id = ?", id)
-	c.Redirect(http.StatusSeeOther, "/pets")
+	_, err := db.Exec("DELETE FROM pets WHERE id = ?", id)
+	if err != nil {
+		c.String(http.StatusInternalServerError, "Failed to delete pet")
+		return
+	}
+	c.Redirect(http.StatusSeeOther, "/pets?successMessage=Pet successfully deleted!")
 }
 
 func SearchPets(c *gin.Context, db *sql.DB) {
