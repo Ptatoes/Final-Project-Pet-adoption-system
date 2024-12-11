@@ -57,7 +57,7 @@ func UpdatePet(c *gin.Context, db *sql.DB) {
 	id := c.PostForm("id")
 	status := c.PostForm("status")
 	_, _ = db.Exec("UPDATE pets SET status = ? WHERE id = ?", status, id)
-	c.Redirect(http.StatusSeeOther, "/pets")
+	c.Redirect(http.StatusSeeOther, "/pets?successMessage=Pet successfully Updated!")
 }
 
 func DeletePet(c *gin.Context, db *sql.DB) {
